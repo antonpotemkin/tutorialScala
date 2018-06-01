@@ -26,3 +26,15 @@ true || isFirstLess(5, 4) // true
 //function val call by-value
 def x = loop // it's OK
 //val y = loop // infinite loop
+
+// tail-recursive
+def factorial(n: Int) = {
+  def factorialIter(acc: Int, current: Int) : Int =
+    if (current > n) acc else factorialIter(acc * current, current + 1)
+  factorialIter(1,2)
+}
+//recursive
+def fact(n: Int): Int = if (n == 0) 1 else n * fact(n - 1)
+
+factorial(6)
+fact(6)
