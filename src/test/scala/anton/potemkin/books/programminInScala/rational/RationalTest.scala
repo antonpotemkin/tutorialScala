@@ -1,5 +1,6 @@
-package anton.potemkin.books.programmingInScala.rational
+package anton.potemkin.books.programminInScala.rational
 
+import anton.potemkin.books.programmingInScala.rational.Rational
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import org.scalatest.junit.JUnitRunner
