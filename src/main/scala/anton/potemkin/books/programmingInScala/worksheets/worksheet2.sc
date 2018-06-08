@@ -1,0 +1,30 @@
+for (
+  i <- 1 to 10
+  if i % 2 == 0;
+  j <- 1 to 2
+) println(s"i = $i, j = $j")
+
+def ints = for {
+  i <- 1 to 10
+} yield i
+
+println(ints.mkString)
+
+def makeRowSeq(row: Int) =
+  for (col <- 1 to 10) yield {
+    val prod = (row * col).toString
+    val padding = " " * (4 - prod.length)
+    padding + prod
+  }
+
+def makeRow(row: Int) = makeRowSeq(row).mkString
+
+def multiTable() = {
+  val tableSeq =
+    for (row <- 1 to 10)
+      yield makeRow(row)
+
+  tableSeq.mkString("\n")
+}
+
+println(multiTable())
