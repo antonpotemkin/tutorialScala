@@ -11,6 +11,7 @@ class ChatRoomActor extends Actor {
   val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   private var users: Map[String, ActorRef] = Map.empty
+
   override def receive: Receive = {
     case UserConnected(sender, actorRef) =>
       users += sender -> actorRef
@@ -35,7 +36,8 @@ class ChatRoomActor extends Actor {
 
   }
 
-  private def broadcast(msq: ChatMessage):Unit = users.values.foreach(_ ! msq)
+  private def broadcast(msq: ChatMessage): Unit = users.values.foreach(_ ! msq)
+
   private def sendMessage(msg: ChatMessage, actorRef: ActorRef): Unit = actorRef ! msg
 
   def isCommand(txt: String): Boolean = txt.startsWith("/")
