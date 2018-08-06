@@ -11,12 +11,10 @@ object WebSocket extends App {
   implicit val materializer = ActorMaterializer()
   implicit val executionContext = system.dispatcher
 
-
   val config = system.settings.config
   val interface = config.getString("app.interface")
   val port = config.getInt("app.port")
   val router = new Router()
-
 
   val binding = Http().bindAndHandle(router.route, interface, port)
   binding.onComplete {
