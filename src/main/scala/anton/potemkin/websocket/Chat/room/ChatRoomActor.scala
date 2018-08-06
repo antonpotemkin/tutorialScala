@@ -1,6 +1,6 @@
 package anton.potemkin.websocket.Chat.room
 
-import akka.actor.{Actor, ActorRef, Terminated}
+import akka.actor.{Actor, ActorRef}
 import anton.potemkin.websocket.Chat._
 
 class ChatRoomActor extends Actor {
@@ -16,9 +16,8 @@ class ChatRoomActor extends Actor {
       broadcast(SystemMessage(s"User with actorRef $sender left channel...").toChatMessage)
       println(s"User with actorRef $sender left channel...")
     case msg: ReceivedMessage =>
-      println(s"User ${msg.sender} receive message")
+      println(s"User ${msg.sender} send message")
       broadcast(msg.toChatMessage)
-
   }
 
   private def broadcast(msq: ChatMessage):Unit = users.values.foreach(_ ! msq)

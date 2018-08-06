@@ -6,17 +6,14 @@ case class ChatMessage(message: String) extends ChatEvent
 
 sealed trait ChatEvent
 
-case class UserConnected(sender: String, actor: ActorRef) extends ChatEvent
+case class UserConnected(name: String, actor: ActorRef) extends ChatEvent
 
-case class UserDisconnected(sender: String) extends ChatEvent
+case class UserDisconnected(name: String) extends ChatEvent
 
-//todo добавить обработку имени
 case class ReceivedMessage(sender: String, message: String) extends ChatEvent {
-  def toChatMessage: ChatMessage = ChatMessage(s"[receive]: $message")
+  def toChatMessage: ChatMessage = ChatMessage(s"[$sender]: $message")
 }
 
 case class SystemMessage(message: String) extends ChatEvent {
   def toChatMessage: ChatMessage = ChatMessage(s"[System]: $message")
 }
-
-case class SentMessage(message: String) extends ChatEvent

@@ -14,7 +14,7 @@ class ChatRoom(system: ActorSystem) {
   def flowChat(sender: String): Flow[Message, Message, NotUsed] = {
     val fromWebsocket: Sink[Message, NotUsed] = Flow[Message]
       .map {
-        case TextMessage.Strict(txt) => ReceivedMessage(txt)
+        case TextMessage.Strict(txt) => ReceivedMessage(sender,txt)
       }
       .to(Sink.actorRef[ChatEvent](chatRoomActor, UserDisconnected(sender)))
 
