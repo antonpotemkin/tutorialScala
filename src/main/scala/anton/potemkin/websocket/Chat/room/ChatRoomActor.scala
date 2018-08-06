@@ -5,29 +5,31 @@ import java.util.Date
 
 import akka.actor.{Actor, ActorRef}
 import anton.potemkin.websocket.Chat._
+import org.slf4j.{Logger, LoggerFactory}
 
 class ChatRoomActor extends Actor {
+  val logger: Logger = LoggerFactory.getLogger(this.getClass)
 
   private var users: Map[String, ActorRef] = Map.empty
   override def receive: Receive = {
     case UserConnected(sender, actorRef) =>
       users += sender -> actorRef
-      broadcast(SystemMessage(s"User $sender joined channel...").toChatMessage)
-      println(s"User $sender joined channel...")
+      broadcast(SystemMessage(s"User $sender joined channel").toChatMessage)
+      logger.info(s"User $sender joined channel")
     case UserDisconnected(sender) =>
       users -= sender
-      broadcast(SystemMessage(s"User with actorRef $sender left channel...").toChatMessage)
-      println(s"User with actorRef $sender left channel...")
+      broadcast(SystemMessage(s"User with actorRef $sender left channel").toChatMessage)
+      logger.info(s"User with actorRef $sender left channel")
     case msg: ReceivedMessage =>
       val message = msg.message
       val sender = msg.sender
       if (isCommand(message)) {
-        println(s"User $sender send command $message")
+        logger.info(s"User $sender send command $message")
         val response = getCommandMessage(message)
         val actorRef = users(sender)
         sendMessage(SystemMessage(response).toChatMessage, actorRef)
       } else {
-        println(s"User $sender send message: $message")
+        logger.info(s"User $sender send message: $message")
         broadcast(msg.toChatMessage)
       }
 
