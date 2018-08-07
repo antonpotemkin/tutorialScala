@@ -17,4 +17,4 @@
 
 * [parameter-directives](https://doc.akka.io/docs/akka-stream-and-http-experimental/1.0/scala/http/routing-dsl/directives/parameter-directives/parameters.html)
 
-*[Введение в Akka Streams](https://www.youtube.com/watch?v=L3_ddzZDWvM)
+* [Введение в Akka Streams](https://www.youtube.com/watch?v=L3_ddzZDWvM)
