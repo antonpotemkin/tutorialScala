@@ -6,7 +6,7 @@ import akka.stream.ActorMaterializer
 
 import scala.util.{Failure, Success}
 
-object WebSocket extends App {
+object Chat extends App {
   implicit val system = ActorSystem("my-system")
   implicit val materializer = ActorMaterializer()
   implicit val executionContext = system.dispatcher
